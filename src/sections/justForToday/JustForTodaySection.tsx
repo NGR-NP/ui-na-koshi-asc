@@ -1,4 +1,4 @@
-import { addDays, differenceInSeconds, format, isAfter, set } from "date-fns";
+import { format } from "date-fns";
 
 import { cn } from "@/lib/utils";
 
@@ -9,33 +9,11 @@ import { Section, WrapperSection } from "@/components/custom/Section";
 
 import CacheTags from "@/constant/CacheTags";
 
-function getNextRevalidationTime() {
-  const now = new Date();
-
-  let nextRevalidationTime = set(
-    new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()),
-    {
-      hours: 0,
-      minutes: 2,
-      seconds: 0,
-      milliseconds: 0,
-    }
-  );
-
-  if (isAfter(now, nextRevalidationTime)) {
-    nextRevalidationTime = addDays(nextRevalidationTime, 1);
-  }
-
-  return differenceInSeconds(nextRevalidationTime, now);
-}
-
 async function GetJFT(date: string) {
-  const revalidationSeconds = getNextRevalidationTime();
-
   try {
     const res = await fetch(`https://just-for-today.onrender.com/jft/${date}`, {
       next: {
-        revalidate: revalidationSeconds,
+        revalidate: 86400,
         tags: [`${CacheTags.JFT}-${date}`],
       },
     });
