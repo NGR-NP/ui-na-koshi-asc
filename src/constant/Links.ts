@@ -2,12 +2,11 @@
 const BASE_PATHS = {
   PAGE_HOME: "/",
   PAGE_ABOUT: "/about",
-  PAGE_METTING: "/mettings",
+  PAGE_Meeting: "/meetings",
   PAGE_EVENT: "/events",
   PAGE_MERCHANDISE: "/merchandise",
   PAGE_LITERATURE: "/literature",
-  PAGE_COMMITTEE: "/committee",
-  PAGE_CONTACT: "/contact",
+  PAGE_CONTACT: "/contact-us",
   PAGE_DONATION: "/donation",
   PAGE_GALLERY: "/gallery",
   PAGE_NEWS: "/news",
@@ -20,11 +19,13 @@ const createPath = (base: string, ...subPaths: string[]) => {
 const LINKS = {
   Sub_PAGE_ABOUT: {
     NA: createPath(BASE_PATHS.PAGE_ABOUT, "na"),
+    NEPAL_REGION: createPath(BASE_PATHS.PAGE_ABOUT, "nepal-region"),
   },
-  Sub_PAGE_METTING: {
-    ONLINE: createPath(BASE_PATHS.PAGE_METTING, "online"),
-    PHYSICAL: createPath(BASE_PATHS.PAGE_METTING, "physical"),
-    HYBRID: createPath(BASE_PATHS.PAGE_METTING, "hybrid"),
+  Sub_PAGE_Meeting: {
+    TODAY: createPath(BASE_PATHS.PAGE_Meeting, "today"),
+    ONLINE: createPath(BASE_PATHS.PAGE_Meeting, "online"),
+    PHYSICAL: createPath(BASE_PATHS.PAGE_Meeting, "physical"),
+    HYBRID: createPath(BASE_PATHS.PAGE_Meeting, "hybrid"),
   },
   Sub_PAGE_EVENT: {
     UPCOMING: createPath(BASE_PATHS.PAGE_EVENT, "upcoming"),
@@ -37,11 +38,10 @@ const LINKS = {
 };
 
 // Destructure to export individual links
-export const { Sub_PAGE_ABOUT, Sub_PAGE_EVENT, Sub_PAGE_METTING } = LINKS;
+export const { Sub_PAGE_ABOUT, Sub_PAGE_EVENT, Sub_PAGE_Meeting } = LINKS;
 
 export const {
   PAGE_ABOUT,
-  PAGE_COMMITTEE,
   PAGE_CONTACT,
   PAGE_DONATION,
   PAGE_EVENT,
@@ -49,6 +49,6 @@ export const {
   PAGE_HOME,
   PAGE_LITERATURE,
   PAGE_MERCHANDISE,
-  PAGE_METTING,
+  PAGE_Meeting,
   PAGE_NEWS,
 } = BASE_PATHS;

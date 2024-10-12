@@ -24,8 +24,8 @@ export default function ActivePathnameHighliter({
     <div
       // eslint-disable-next-line tailwindcss/no-custom-classname
       className={cn(
-        active && `isActive text-primary ${activeStyle}`,
         className,
+        active && `isActive text-primary ${activeStyle}`,
         "group"
       )}
       data-active={active}

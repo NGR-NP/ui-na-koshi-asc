@@ -37,7 +37,7 @@ interface MerchActionsProps {
 // Main component
 export default function MerchCardFooter({ merch }: MerchActionsProps) {
   const { varient } = merch;
-  const firstMerch = varient[0];
+  const firstMerch = varient[0].stock > 0 ? varient[0] : varient[1];
   const isFirstMerchHasStock = firstMerch.stock > 0;
 
   const form = useForm<Inputs>({
@@ -61,11 +61,13 @@ export default function MerchCardFooter({ merch }: MerchActionsProps) {
   const handleQtyChange = (
     value: number,
     onChange: (value: number) => void,
-    type: "add" | "sub"
+    type: "+" | "-"
   ) => {
     const val = Number(value);
     if (!Number.isNaN(val) && val > 0) {
-      onChange(type === "add" ? val + 1 : Math.max(1, val - 1)); // Ensure quantity does not go below 1
+      onChange(type === "+" ? val + 1 : Math.max(1, val - 1)); // Ensure quantity does not go below 1
+    } else {
+      onChange(1);
     }
   };
 
@@ -117,22 +119,26 @@ export default function MerchCardFooter({ merch }: MerchActionsProps) {
                     value={value}
                     onChange={onChange}
                     inputMode="numeric"
-                    className={`order-2 size-8 appearance-none p-0 text-center ${
-                      invalid ? "animate-shake border-red-500" : ""
-                    }`}
+                    className={cn(
+                      "order-2 size-8 appearance-none p-0 text-center",
+                      invalid
+                        ? "animate-shake border-red-500 focus-visible:ring-destructive"
+                        : "dark:focus-visible:ring-offset-foreground"
+                    )}
                   />
                   <Button
                     size="icon"
-                    onClick={() => handleQtyChange(value, onChange, "add")}
+                    onClick={() => handleQtyChange(value, onChange, "+")}
                     className="order-3 size-8 p-0 active:scale-95"
                     variant="ghost"
                   >
                     <PlusCircleIcon />
                   </Button>
                   <Button
-                    onClick={() => handleQtyChange(value, onChange, "sub")}
+                    onClick={() => handleQtyChange(value, onChange, "-")}
                     variant="ghost"
                     size="icon"
+                    disabled={value < 2}
                     className="order-1 size-8 p-0 active:scale-95"
                   >
                     <MinusCircleIcon />
@@ -269,7 +275,7 @@ const ChooseSize = ({
             <ToggleGroupItem
               key={size}
               value={size}
-              className="uppercase active:scale-95"
+              className="uppercase active:scale-95 dark:focus-visible:ring-foreground"
             >
               {size}
             </ToggleGroupItem>

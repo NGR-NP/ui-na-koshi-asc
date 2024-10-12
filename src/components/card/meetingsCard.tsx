@@ -1,6 +1,8 @@
-import { Clock, Map } from "lucide-react";
+import { ReactNode } from "react";
 
-import { checkMeetingStatus, getDayName } from "@/lib/metting-time-status";
+import { Clock, Map, PersonStanding } from "lucide-react";
+
+import { checkMeetingStatus, getDayName } from "@/lib/meeting-time-status";
 import { cn } from "@/lib/utils";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -11,19 +13,25 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 
-import { IconCalender, IconDot, IconLocation } from "@/components/Svg/svgicons";
+import {
+  IconCalender,
+  IconDot,
+  IconGroupUsers,
+  IconLocation,
+} from "@/components/Svg/svgicons";
 import { ExternalLink } from "@/components/custom/ExternalLink";
 
 import { LogoNAKoshiWhite, LogoNaKoshi } from "@/constant/images";
 
+import IconMoniter from "../Svg/MoniterSvgIcon";
 import SimpleTooltipComp from "../custom/SimpleTooltip";
 import { Separator } from "../ui/separator";
 
-interface MettingCardProps {
-  item: MettingListType;
+interface MeetingCardProps {
+  item: MeetingListType;
   className?: string;
 }
-export const MettingCard = ({ item, className }: MettingCardProps) => {
+export const MeetingCard = ({ item, className }: MeetingCardProps) => {
   const status = checkMeetingStatus(item);
   const shortName = item.name
     .split(" ")
@@ -77,7 +85,7 @@ export const MettingCard = ({ item, className }: MettingCardProps) => {
                   {item?.name}
                 </p>
                 {status.live == 0 && (
-                  <SimpleTooltipComp content={status.shortMessage}>
+                  <SimpleTooltipComp content={status.message}>
                     <p className="line-clamp-2 text-sm text-muted-foreground">
                       {status.shortMessage}
                     </p>
@@ -97,24 +105,39 @@ export const MettingCard = ({ item, className }: MettingCardProps) => {
           <ul className="flex flex-col gap-y-2">
             <li className="group flex w-full flex-wrap items-start justify-between gap-x-2 gap-y-1 text-foreground/80">
               <CardDescription className="flex items-center gap-2 group-hover:text-foreground">
-                <Clock size={18} /> time: &emsp;
+                {item.type == "physical" ? (
+                  <IconGroupUsers className="size-5" />
+                ) : item.type === "online" ? (
+                  <IconMoniter className="size-[1.1rem]" />
+                ) : (
+                  <PersonStanding size={18} />
+                )}
+                Type:&emsp;
               </CardDescription>
               <CardDescription className="text-base group-hover:text-foreground">
-                <b className="text-nowrap">{item?.from}</b>&nbsp;to&nbsp;
-                <b className="text-nowrap">{item.to}</b>
+                <b>{item.type}</b>
+              </CardDescription>
+            </li>
+            <li className="group flex w-full flex-wrap items-start justify-between gap-x-2 gap-y-1 text-foreground/80">
+              <CardDescription className="flex items-center gap-2 group-hover:text-foreground">
+                <Clock size={18} /> Time:&emsp;
+              </CardDescription>
+              <CardDescription className="text-base group-hover:text-foreground">
+                <b className="text-nowrap">{item?.startTime}</b>&nbsp;to&nbsp;
+                <b className="text-nowrap">{item.endTime}</b>
               </CardDescription>
             </li>
             <li className="group flex w-full items-start justify-between gap-x-2 gap-y-1 text-foreground/80 max-sm:flex-col max-sm:items-stretch">
               <CardDescription className="flex items-center gap-2 group-hover:text-foreground">
-                <Map size={18} /> {item?.gmap ? "Direction" : "Location"}:&emsp;
+                <Map size={18} /> {item?.gMap ? "Direction" : "Address"}:&emsp;
               </CardDescription>
               <ExternalLink
-                href={item.gmap}
+                href={item.gMap}
                 className={`line-clamp-2 group-hover:text-foreground ${
-                  item?.gmap && "underline focus-visible:underline"
+                  item?.gMap && "underline focus-visible:underline"
                 }`}
               >
-                {item.location}
+                {item.address}
               </ExternalLink>
             </li>
           </ul>
@@ -125,7 +148,7 @@ export const MettingCard = ({ item, className }: MettingCardProps) => {
 };
 interface LionHeadersProps {
   icon: SvgIconComponentType;
-  children: string;
+  children: ReactNode;
 }
 const LionHeaders = ({ children, icon }: LionHeadersProps) => {
   const Icon = icon;
@@ -137,13 +160,13 @@ const LionHeaders = ({ children, icon }: LionHeadersProps) => {
   );
 };
 
-function HeaderDayandCityCOmp({
+const HeaderDayandCityCOmp = ({
   item,
   className,
 }: {
-  item: MettingListType;
+  item: MeetingListType;
   className?: string;
-}) {
+}) => {
   return (
     <div
       className={cn(
@@ -155,4 +178,4 @@ function HeaderDayandCityCOmp({
       <LionHeaders icon={IconCalender}>{getDayName(item?.day)}</LionHeaders>
     </div>
   );
-}
+};

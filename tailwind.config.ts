@@ -58,6 +58,10 @@ const config = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      fontSize: {
+        "5xl": ["3rem", "1.3"],
+        "4xl": ["2.25rem", "1.3"],
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },
@@ -180,6 +184,9 @@ const config = {
         sans: ["var(--font-geist-sans)"],
         mono: ["var(--font-geist-mono)"],
         poppins: ["var(--font-poppins)"],
+      },
+      animationDuration: {
+        "2s": "500s",
       },
       padding: {
         "section-sm": "1.5rem",

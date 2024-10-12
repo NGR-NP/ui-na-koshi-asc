@@ -10,7 +10,7 @@ import {
 } from "date-fns";
 
 // Constants
-const MEETING_TIME_FORMAT = "yyyy-MM-dd hh:mm a";
+const MEETING_TIME_FORMAT = "yyyy-MM-dd HH:mm";
 const MINUTES_BEFORE_MEETING_START_TO_NOTIFY = 59;
 const MINUTES_BEFORE_MEETING_END_TO_NOTIFY = 15;
 const MINUTES_AFTER_MEETING_START_TO_SHOW_ONGOING = 15;
@@ -19,7 +19,7 @@ function parseDateTime(date: string, time: string) {
   return parse(`${date} ${time}`, MEETING_TIME_FORMAT, new Date());
 }
 
-export function checkMeetingStatus(meeting: MettingListType) {
+export function checkMeetingStatus(meeting: MeetingListType) {
   const now = new Date();
   const todayDate = format(now, "yyyy-MM-dd");
   const todayDay = now.getDay(); // Get the current day of the week (0-6)
@@ -27,15 +27,15 @@ export function checkMeetingStatus(meeting: MettingListType) {
   // Check if today is the day of the meeting
   if (meeting.day !== todayDay) {
     return {
-      message: "No meetings scheduled for today.",
+      // message: "No meetings scheduled for today.",
+      message: `Next meeting is on ${getDayName(meeting.day)}`,
       remainingTime: null,
       live: 0,
     };
   }
 
-  const startTime = parseDateTime(todayDate, meeting.from);
-  const endTime = parseDateTime(todayDate, meeting.to);
-
+  const startTime = parseDateTime(todayDate, meeting.startTime);
+  const endTime = parseDateTime(todayDate, meeting.endTime);
   // Ensure both startTime and endTime are valid dates
   if (isNaN(startTime.getTime()) || isNaN(endTime.getTime())) {
     return {
@@ -55,7 +55,7 @@ export function checkMeetingStatus(meeting: MettingListType) {
 
     return {
       message: `🌟 ${meeting.name} ${timeMessage}`,
-      shortMessage: `Metting ${timeMessage}!`,
+      shortMessage: `Meeting ${timeMessage}!`,
       remainingTime,
       live: 1,
     };
@@ -63,7 +63,7 @@ export function checkMeetingStatus(meeting: MettingListType) {
 
   if (isAfter(now, endTime)) {
     return {
-      message: `❌ ${meeting.name} metting on ${getDayName(meeting.day)} has ended.`,
+      message: `❌ ${meeting.name} meeting on ${getDayName(meeting.day)} has ended.`,
       shortMessage: "Meeting has ended.",
       remainingTime: null,
       live: 0,

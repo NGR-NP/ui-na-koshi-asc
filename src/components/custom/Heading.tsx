@@ -7,16 +7,23 @@ import { cva } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 export const titleVariants = cva(
-  "scroll-m-20 text-balance font-semibold leading-none tracking-tight",
+  "scroll-m-20 overflow-hidden text-balance font-semibold leading-none tracking-tight",
   {
     variants: {
       variant: {
-        h1: "text-4xl font-extrabold lg:text-5xl ",
+        h1: "text-3xl font-extrabold  sm:text-4xl lg:text-5xl",
         h2: "text-3xl",
         default: "text-2xl",
         h4: "text-xl ",
         h5: "text-sm font-medium",
         h6: "text-xs font-medium",
+      },
+      autoRezide: {
+        h1: "max-[450px]:text-[1rem]",
+        h3: "max-[450px]:text-[12dvw]",
+      },
+      centerOnMobile: {
+        true: "max-sm:text-center",
       },
     },
     defaultVariants: {
@@ -31,12 +38,24 @@ export interface HeadingProps
 }
 
 const Heading = React.forwardRef<HTMLHeadingElement, HeadingProps>(
-  ({ className, variant, asChild = false, ...props }, ref) => {
+  (
+    {
+      className,
+      variant,
+      centerOnMobile,
+      autoRezide,
+      asChild = false,
+      ...props
+    },
+    ref
+  ) => {
     const Comp = asChild ? Slot : "h3";
     return (
       <Comp
         ref={ref}
-        className={cn(titleVariants({ variant, className }))}
+        className={cn(
+          titleVariants({ variant, autoRezide, centerOnMobile, className })
+        )}
         {...props}
       />
     );

@@ -22,13 +22,13 @@ import { Paragraph } from "@/components/custom/Paragraph";
 
 import {
   PAGE_ABOUT,
-  PAGE_COMMITTEE,
   PAGE_CONTACT,
-  PAGE_METTING,
+  PAGE_Meeting,
   Sub_PAGE_ABOUT,
   Sub_PAGE_EVENT,
-  Sub_PAGE_METTING,
+  Sub_PAGE_Meeting,
 } from "@/constant/Links";
+import { Route_NepalRegion } from "@/constant/RoutesWithName";
 import { LogoNAKoshiWhite, LogoNaKoshi } from "@/constant/images";
 
 export function NavMenu() {
@@ -46,7 +46,7 @@ export function NavMenu() {
               <li className="row-span-3">
                 <ActivePathnameNavItemHighliter href={PAGE_ABOUT}>
                   <Link
-                    className="flex size-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline shadow-md outline-none focus:shadow-md"
+                    className="flex size-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-accent/50 to-muted p-6 no-underline shadow-md outline-none focus:shadow-md"
                     href={PAGE_ABOUT}
                   >
                     <Image
@@ -78,10 +78,13 @@ export function NavMenu() {
               <ListItem href={Sub_PAGE_ABOUT.NA} title="About NA">
                 Lorem ipsum dolor, sit amet consectetur adipisicing elit.
               </ListItem>
-              <ListItem href={PAGE_CONTACT} title="Contact Us">
+              <ListItem
+                href={Route_NepalRegion.href}
+                title={Route_NepalRegion.name}
+              >
                 Lorem ipsum dolor, sit amet consectetur adipisicing elit.
               </ListItem>
-              <ListItem href={PAGE_COMMITTEE} title="Committee">
+              <ListItem href={PAGE_CONTACT} title="Contact Us">
                 Lorem ipsum dolor, sit amet consectetur adipisicing elit.
               </ListItem>
             </ul>
@@ -107,19 +110,19 @@ export function NavMenu() {
         </NavigationMenuItem>
         <NavigationMenuItem>
           <NavigationMenuTrigger className="bg-transparent">
-            Mettings
+            Meetings
           </NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[700px] lg:grid-cols-[1fr_1fr]">
               <li className="row-span-4">
-                <ActivePathnameNavItemHighliter href={PAGE_METTING}>
+                <ActivePathnameNavItemHighliter href={PAGE_Meeting}>
                   <Link
-                    className="flex size-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-                    href={PAGE_METTING}
+                    className="flex size-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-accent/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+                    href={PAGE_Meeting}
                   >
                     <UserGroup />
                     <Paragraph className="mb-2 mt-4 text-pretty text-lg font-medium text-foreground">
-                      Find Mettings in Koshi Area
+                      Find Meetings in Koshi Area
                     </Paragraph>
                     <Paragraph className="text-wrap text-sm leading-snug">
                       We understand that staying clean can be incredibly
@@ -132,19 +135,19 @@ export function NavMenu() {
                   </Link>
                 </ActivePathnameNavItemHighliter>
               </li>
-              <ListItem href={"/today"} title="Today Meetings">
+              <ListItem href={Sub_PAGE_Meeting.TODAY} title="Today Meetings">
                 Join our online meetings from the comfort of your home.
               </ListItem>
-              <ListItem href={Sub_PAGE_METTING.ONLINE} title="Online Meetings">
+              <ListItem href={Sub_PAGE_Meeting.ONLINE} title="Online Meetings">
                 Join our online meetings from the comfort of your home.
               </ListItem>
               <ListItem
-                href={Sub_PAGE_METTING.PHYSICAL}
+                href={Sub_PAGE_Meeting.PHYSICAL}
                 title="Physical Meetings"
               >
                 Find in-person meetings happening across the Koshi area.
               </ListItem>
-              <ListItem href={Sub_PAGE_METTING.HYBRID} title="Hybrid Meetings">
+              <ListItem href={Sub_PAGE_Meeting.HYBRID} title="Hybrid Meetings">
                 Attend hybrid meetings, both in-person and online.
               </ListItem>
             </ul>
@@ -191,7 +194,7 @@ const ListItem = React.forwardRef<
           href={href || "#"}
           ref={ref}
           className={cn(
-            "block select-none space-y-1 rounded-md p-3 leading-none no-underline shadow-md outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+            "block select-none space-y-1 rounded-md bg-popover p-3 leading-none no-underline shadow-sm outline-none transition-colors hover:bg-accent/50 hover:text-popover-foreground hover:shadow-md focus-visible:bg-accent focus-visible:text-accent-foreground",
             className
           )}
           {...props}
@@ -199,7 +202,7 @@ const ListItem = React.forwardRef<
           <div className="text-sm font-medium leading-none group-data-[active]:font-bold">
             {title}
           </div>
-          <Paragraph className="line-clamp-2 text-sm leading-snug">
+          <Paragraph className="line-clamp-2 text-sm leading-snug focus-visible:text-accent-foreground">
             {children}
           </Paragraph>
         </Link>

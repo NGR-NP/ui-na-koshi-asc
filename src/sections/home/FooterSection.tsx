@@ -7,33 +7,33 @@ import FooterCTAButton from "@/components/FooterCTAButton";
 
 import {
   APP_ROUTES,
-  EventLinks,
   HelpCenterLinks,
-  MettingLinks,
+  Route_Events,
+  Route_Meetings,
 } from "@/constant/RoutesWithName";
 
 export default function FooterSection() {
   return (
-    <footer className="static inset-x-0 bottom-0 bg-muted px-section-sm text-foreground max-md:mb-12 md:px-section-md">
+    <footer className="static bg-accent px-section-sm text-secondary-foreground md:px-section-md">
       <div className="mx-auto w-full max-w-screen-2xl">
         <div className="relative grid grid-cols-2 gap-8 px-4 py-6 md:grid-cols-4 lg:py-8">
           <div>
-            <FooterLinkTitle> Pages</FooterLinkTitle>
+            <FooterLinkTitle>Links</FooterLinkTitle>
             <FooterLinks map={APP_ROUTES} />
           </div>
           <div>
-            <Link href="/mettings">
-              <FooterLinkTitle>Mettings</FooterLinkTitle>
+            <Link href="/Meetings">
+              <FooterLinkTitle>Meetings</FooterLinkTitle>
             </Link>
 
-            <FooterLinks map={MettingLinks} />
+            <FooterLinks map={Route_Meetings} />
           </div>
           <div>
             <Link href="/events">
               <FooterLinkTitle>Events</FooterLinkTitle>
             </Link>
 
-            <FooterLinks map={EventLinks} />
+            <FooterLinks map={Route_Events} />
           </div>
           <div>
             <FooterLinkTitle>Help center</FooterLinkTitle>
@@ -109,21 +109,26 @@ export default function FooterSection() {
 
 const FooterLinkTitle = ({ children }: { children: ReactNode }) => {
   return (
-    <h2 className="mb-6 text-sm font-semibold uppercase text-foreground">
+    <h2 className="mb-6 text-sm font-semibold uppercase text-accent-foreground">
       {children}
     </h2>
   );
 };
 const FooterLinks = ({ map }: { map: typeof APP_ROUTES }) => {
   return (
-    <ul className="font-medium text-muted-foreground">
+    <ul className="font-medium">
       {map.map((link) => {
         const isExternal = link.href.startsWith("http");
         return (
-          <ActivePathnameHighliter key={link.href} href={link.href}>
+          <ActivePathnameHighliter
+            key={link.href}
+            href={link.href}
+            className="text-secondary-foreground/50"
+            activeStyle="text-secondary-foreground"
+          >
             <li
               key={link.href}
-              className="mb-4 hover:text-slate-900 dark:hover:text-slate-200"
+              className="mb-4 hover:text-secondary-foreground"
             >
               {isExternal ? (
                 <a href={link.href} target="_blank" className="hover:underline">

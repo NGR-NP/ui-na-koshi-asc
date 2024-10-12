@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { Boxes, Home, ScrollText, ShoppingBag, TicketPlus } from "lucide-react";
+import { Home, ScrollText, ShoppingBag, TicketPlus } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -17,13 +17,12 @@ import {
 import NaKoshiAscLogo from "@/assets/logo/na_koshi_asc_logo.jpg";
 import {
   PAGE_ABOUT,
-  PAGE_COMMITTEE,
   PAGE_CONTACT,
   PAGE_EVENT,
   PAGE_HOME,
   PAGE_LITERATURE,
   PAGE_MERCHANDISE,
-  PAGE_METTING,
+  PAGE_Meeting,
 } from "@/constant/Links";
 
 export default function SideNavbar() {
@@ -87,8 +86,7 @@ export default function SideNavbar() {
 }
 const Links = [
   { name: "Home", icon: Home, link: PAGE_HOME },
-  { name: "Committee", icon: Boxes, link: PAGE_COMMITTEE },
-  { name: "Meetings", icon: IconUserGroupOutline, link: PAGE_METTING },
+  { name: "Meetings", icon: IconUserGroupOutline, link: PAGE_Meeting },
   { name: "Events", icon: TicketPlus, link: PAGE_EVENT },
   { name: "Literature", icon: ScrollText, link: PAGE_LITERATURE },
   { name: "Merchandise", icon: ShoppingBag, link: PAGE_MERCHANDISE },

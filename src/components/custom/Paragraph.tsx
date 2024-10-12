@@ -1,25 +1,51 @@
 import React from "react";
 
 import { Slot } from "@radix-ui/react-slot";
+import type { VariantProps } from "class-variance-authority";
+import { cva } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
 
-interface ParagraphProps extends React.HTMLAttributes<HTMLParagraphElement> {
+// class varient authrity
+const paragraphVariants = cva(
+  "text-pretty text-base leading-7 text-foreground/85 ",
+  {
+    variants: {
+      multiParagraph: {
+        true: "[&:not(:first-child)]:mt-6",
+        sm: "[&:not(:first-child)]:mt-2",
+        md: "[&:not(:first-child)]:mt-4",
+        lg: "[&:not(:first-child)]:mt-6",
+      },
+      centerOnMobile: {
+        default: "max-sm:text-center",
+        false: "max-sm:text-start",
+      },
+    },
+    defaultVariants: {
+      centerOnMobile: "default",
+    },
+  }
+);
+
+interface ParagraphProps
+  extends React.HTMLAttributes<HTMLParagraphElement>,
+    VariantProps<typeof paragraphVariants> {
   asChild?: boolean;
-  multiParagraph?: boolean;
 }
 
 const Paragraph = React.forwardRef<HTMLParagraphElement, ParagraphProps>(
-  ({ className, multiParagraph = false, asChild = false, ...props }, ref) => {
+  (
+    { className, multiParagraph, centerOnMobile, asChild = false, ...props },
+    ref
+  ) => {
     const Comp = asChild ? Slot : "p";
 
     return (
       <Comp
         ref={ref}
         className={cn(
-          "text-pretty text-base leading-7 text-muted-foreground",
-          multiParagraph ? "[&:not(:first-child)]:mt-6" : "",
-          className
+          paragraphVariants({ multiParagraph, centerOnMobile, className })
         )}
         {...props}
       />

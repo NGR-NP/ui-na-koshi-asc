@@ -58,12 +58,14 @@ export const metadata: Metadata = {
   },
   applicationName: "NA KOSHI ASC",
   formatDetection: { telephone: true, email: true },
+  classification: "Nonprofit Organization",
   appleWebApp: {
     title: "NA KOSHI ASC",
     capable: true,
     startupImage: "/apple-touch-icon.png",
     statusBarStyle: "black-translucent",
   },
+
   icons: {
     icon: [
       {
@@ -76,7 +78,7 @@ export const metadata: Metadata = {
         rel: "icon",
         type: "image/svg+xml",
         media: "(prefers-color-scheme: light)",
-        url: "/favicon-light.svg",
+        url: "/favicon.svg",
       },
     ],
   },
@@ -91,13 +93,13 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "/",
-    siteName: "NA KOSHI ASC",
+    siteName: "Narcotics Anonymous KOSHI Area Service Committee",
     images: [
       {
         url: "/logo/na-koshi-light.jpg",
         width: 1200,
         height: 630,
-        alt: "NA KOSHI ASC",
+        alt: "Narcotics Anonymous KOSHI Area Service Committee",
       },
     ],
   },
@@ -114,9 +116,23 @@ export const metadata: Metadata = {
         url: "/logo/na-koshi-light.jpg",
         width: 1200,
         height: 630,
-        alt: "NA KOSHI ASC",
+        alt: "Narcotics Anonymous KOSHI Area Service Committee",
       },
     ],
+  },
+  alternates: {
+    canonical: "/",
+    languages: {
+      en: "/en",
+    },
+  },
+  verification: {
+    google: "google",
+    yandex: "yandex",
+    yahoo: "yahoo",
+    other: {
+      me: ["nakoshi@gmail.com"],
+    },
   },
 };
 {

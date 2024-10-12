@@ -23,27 +23,25 @@ export default function IntroSection() {
             fill
             src={MountainView}
             alt="Nepal Mountain view"
-            loadingClassName=" brightness-[0.3] dark:brightness-[0.1]"
-            className="size-full object-cover object-top bg-blend-soft-light blur-sm transition-all duration-500"
+            className="size-full object-cover object-top bg-blend-soft-light blur-sm brightness-[0.4] transition-all duration-500 dark:brightness-[0.3]"
           />
-          <div className="absolute size-full bg-black/70" />
         </LoadingImg>
 
-        <div className="absolute left-0 top-0 flex size-full flex-col justify-center space-y-5 px-section-sm md:px-section-md">
+        <div className="absolute left-0 top-0 flex size-full flex-col justify-center space-y-2 px-section-sm sm:space-y-4 md:px-section-md">
           <div className="max-w-screen-md space-y-3">
-            <h1 className="animate-slide-down text-pretty bg-transparent text-[6vw] font-bold leading-snug text-slate-50 sm:text-3xl sm:leading-normal md:text-4xl lg:text-5xl">
+            <h1 className="text-pretty bg-transparent text-[6vw] font-bold leading-snug text-slate-50 transition-none duration-500 animate-in slide-in-from-top-10 sm:text-3xl sm:leading-normal md:text-4xl lg:text-5xl">
               WELCOME TO{" "}
               <span className="sm:text-nowrap">NARCOTICS ANONYMOUS</span>{" "}
               <span className="text-nowrap">KOSHI ASC</span>
             </h1>
-            <p className="text-pretty text-sm text-slate-200 animate-in slide-in-from-bottom-4 max-[450px]:text-[3.2dvw] md:text-base">
+            <p className="text-pretty text-sm text-slate-200 transition-none duration-700 animate-in slide-in-from-bottom-4 max-[450px]:text-[3.2dvw] md:text-base">
               If you think you might have a drug problem and want to stop using
               them, we can help.
             </p>
           </div>
           <Separator className="max-w-screen-md bg-slate-400" />
           <div className="max-w-screen-md space-y-6">
-            <p className="text-pretty text-sm text-slate-400 animate-in slide-in-from-top-4 max-[450px]:text-[3.2dvw] sm:text-slate-300 md:text-base">
+            <p className="text-pretty text-sm text-slate-400 transition-none duration-700 animate-in slide-in-from-top-4 max-[450px]:text-[3.2dvw] sm:text-slate-300 md:text-base">
               Narcotics Anonymous (NA) is a nonprofit fellowship of men and
               women for whom drugs have become a major problem. We are
               recovering addicts who meet regularly to support each other in

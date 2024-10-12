@@ -1,20 +1,23 @@
-import MeetingSection from "@/sections/MeetingSection";
-import MerchandiseSection from "@/sections/MerchandiseSection";
+import { Main } from "@/components/custom/MainComp";
+
+import TodayAndUpcommingMeetingSection from "@/sections/Meetings/Today&UpcommingMeetingsSection";
 import AboutAddictSection from "@/sections/home/AboutAddictSection";
+import AboutNAProgramSection from "@/sections/home/AboutNAProgramSection";
 import IntroSection from "@/sections/home/IntroSection";
 import NeedHelpSection from "@/sections/home/NeedHelpSection";
 import JustForToDaySection from "@/sections/justForToday/JustForTodaySection";
 
 export default function Home() {
   return (
-    <main className="flex min-h-[55dvh] flex-col items-center justify-between space-y-10 bg-background">
+    <Main>
       <IntroSection />
       <NeedHelpSection />
       <AboutAddictSection />
-      <JustForToDaySection className="mt-14" />
+      <JustForToDaySection />
+      <AboutNAProgramSection />
 
-      <MeetingSection className="mt-14 2xl:px-0" />
-      <MerchandiseSection />
-    </main>
+      <TodayAndUpcommingMeetingSection />
+      {/* <MerchandiseSection /> */}
+    </Main>
   );
 }
