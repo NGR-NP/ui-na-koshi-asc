@@ -57,12 +57,14 @@ export const metadata: Metadata = {
     },
   },
   applicationName: "NA KOSHI ASC",
+  manifest: "/manifest.json",
+
   formatDetection: { telephone: true, email: true },
   classification: "Nonprofit Organization",
   appleWebApp: {
     title: "NA KOSHI ASC",
     capable: true,
-    startupImage: "/apple-touch-icon.png",
+    startupImage: "/icons/apple-touch-icon.png",
     statusBarStyle: "black-translucent",
   },
 
@@ -72,13 +74,13 @@ export const metadata: Metadata = {
         rel: "icon",
         type: "image/svg+xml",
         media: "(prefers-color-scheme: dark)",
-        url: "/favicon-dark.svg",
+        url: "/icons/favicon-dark.svg",
       },
       {
         rel: "icon",
         type: "image/svg+xml",
         media: "(prefers-color-scheme: light)",
-        url: "/favicon.svg",
+        url: "/icons/favicon.svg",
       },
     ],
   },
