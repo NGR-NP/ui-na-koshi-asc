@@ -14,7 +14,7 @@ async function GetJFT(date: string) {
     const res = await fetch(`https://just-for-today.onrender.com/jft/${date}`, {
       next: {
         revalidate: 86400,
-        tags: [`${CacheTags.JFT}-${date}`],
+        tags: [CacheTags.JFT, `${CacheTags.JFT}-${date}`],
       },
     });
     const data: TypeJustForToday = await res.json();
@@ -50,7 +50,7 @@ export default async function JustForToDaySection({
               <time>{formatdDate(data?.date, "MMMM, dd")}</time>
             </Paragraph>
             <Paragraph className="text-nowrap font-mono text-lg font-medium italic">
-              <span className="font-normal text-muted-foreground/70">Page</span>{" "}
+              <span className="font-normal text-muted-foreground/70">Page</span>
               {data?.page}
             </Paragraph>
           </div>

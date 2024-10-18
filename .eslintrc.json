@@ -2,8 +2,8 @@
   "extends": [
     "next/core-web-vitals",
     "next/typescript",
-    "plugin:tailwindcss/recommended",
-    "prettier"
+    "prettier",
+    "plugin:tailwindcss/recommended"
   ],
   "plugins": ["check-file", "n", "tailwindcss"],
   "rules": {
@@ -11,27 +11,33 @@
     "prefer-template": ["error"],
     "quotes": ["error", "double"],
     "tailwindcss/classnames-order": ["error"],
-    "tailwindcss/no-custom-classname": ["error"],
-    "@next/next/no-img-element": "off",
     "check-file/folder-naming-convention": [
       "error",
       {
         "src/**/!^[.*": "KEBAB_CASE"
       }
     ],
-    "@typescript-eslint/no-unused-vars": ["warn", { "varsIgnorePattern": "^_" }]
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      {
+        "varsIgnorePattern": "^_",
+        "argsIgnorePattern": "^_",
+        "ignoreRestSiblings": true
+      }
+    ]
   },
   "settings": {
     "tailwindcss": {
       "callees": ["cn", "cva"],
-      "config": "tailwind.config.ts",
-      "officialSorting": true
+      "config": "tailwind.config.ts"
     }
   },
   "overrides": [
     {
       "files": ["src/types/**/*.ts"],
       "rules": {
+        "no-unused-vars": "off",
         "@typescript-eslint/no-unused-vars": "off"
       }
     }
