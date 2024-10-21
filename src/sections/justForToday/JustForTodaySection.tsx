@@ -1,4 +1,3 @@
-import { format } from "date-fns";
 
 import { cn } from "@/lib/utils";
 
@@ -8,12 +7,13 @@ import { Paragraph } from "@/components/custom/Paragraph";
 import { Section, WrapperSection } from "@/components/custom/Section";
 
 import CacheTags from "@/constant/CacheTags";
+import { formatdDate } from "./lib/formatDateForJFT";
 
 async function GetJFT(date: string) {
   try {
     const res = await fetch(`https://just-for-today.onrender.com/jft/${date}`, {
       next: {
-        revalidate: 86400,
+        revalidate: 43200,
         tags: [CacheTags.JFT, `${CacheTags.JFT}-${date}`],
       },
     });
@@ -29,9 +29,7 @@ async function GetJFT(date: string) {
 interface JustForTodaySectionProps {
   className?: string;
 }
-function formatdDate(date: Date, type?: string) {
-  return format(date, type || "yyyy-MM-dd");
-}
+
 export default async function JustForToDaySection({
   className,
 }: JustForTodaySectionProps) {

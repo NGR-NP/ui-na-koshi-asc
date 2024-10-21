@@ -1,9 +1,9 @@
-import { revalidatePath } from "next/cache";
+import { revalidateTag } from "next/cache";
 
 import CacheTags from "@/constant/CacheTags";
 
 export async function GET() {
-  revalidatePath(CacheTags.JFT);
+  revalidateTag(CacheTags.JFT);
 
   return new Response("OK", {
     status: 200,
