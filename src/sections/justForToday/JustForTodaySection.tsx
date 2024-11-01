@@ -50,7 +50,9 @@ export default async function JustForToDaySection({
               <time>{formatdDate(data?.date, "MMMM, dd")}</time>
             </Paragraph>
             <Paragraph className="text-nowrap font-mono text-lg font-medium italic">
-              <span className="font-normal text-muted-foreground/70">Page</span>
+              <span className="font-normal text-muted-foreground/70">
+                Page{" "}
+              </span>
               {data?.page}
             </Paragraph>
           </div>
@@ -72,9 +74,10 @@ export default async function JustForToDaySection({
                 key={index}
                 className="text-pretty text-foreground"
                 multiParagraph
-              >
-                {item}
-              </Paragraph>
+                dangerouslySetInnerHTML={{
+                  __html: item,
+                }}
+              />
             ))}
           </div>
           <div>
