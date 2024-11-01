@@ -1,4 +1,3 @@
-
 import { cn } from "@/lib/utils";
 
 import { BlockQuote } from "@/components/custom/Blockquote";
@@ -7,6 +6,7 @@ import { Paragraph } from "@/components/custom/Paragraph";
 import { Section, WrapperSection } from "@/components/custom/Section";
 
 import CacheTags from "@/constant/CacheTags";
+
 import { formatdDate } from "./lib/formatDateForJFT";
 
 async function GetJFT(date: string) {
