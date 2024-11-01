@@ -15,6 +15,7 @@ export default function MerchandiseCard({ merch }: MerchandiseCardProps) {
   return (
     <Card className="group mx-auto h-full w-11/12 max-w-96 select-none rounded-xl shadow-md duration-500 hover:shadow-xl sm:w-full">
       <CardHeader>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={`https://picsum.photos/seed/${merch.name}200/300`}
           alt={merch.name}
