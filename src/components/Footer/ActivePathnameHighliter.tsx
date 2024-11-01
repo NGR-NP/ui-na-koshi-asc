@@ -2,6 +2,8 @@
 
 import { usePathname } from "next/navigation";
 
+import { Slot } from "@radix-ui/react-slot";
+
 import { cn } from "@/lib/utils";
 
 import { NavigationMenuLink } from "../ui/navigation-menu";
@@ -11,17 +13,20 @@ interface ActivePathnameHighliterProps {
   href: string;
   className?: string;
   activeStyle?: string;
+  asChild?: boolean;
 }
 export default function ActivePathnameHighliter({
   children,
   href,
   className,
   activeStyle,
+  asChild = false,
 }: ActivePathnameHighliterProps) {
   const pathname = usePathname();
   const active = pathname === href;
+  const Comp = asChild ? Slot : "div";
   return (
-    <div
+    <Comp
       // eslint-disable-next-line tailwindcss/no-custom-classname
       className={cn(
         className,
@@ -31,7 +36,7 @@ export default function ActivePathnameHighliter({
       data-active={active}
     >
       {children}
-    </div>
+    </Comp>
   );
 }
 

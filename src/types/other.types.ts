@@ -10,3 +10,17 @@ type QuoteType = {
   name: string;
   title: string;
 };
+interface ChildrenType {
+  children: React.ReactNode;
+}
+interface ReadOnlyChildrenType {
+  readonly children: React.ReactNode;
+}
+interface TypeSearchParams {
+  searchParams: { platform?: string; os: string };
+}
+interface TypeChildrenWithSearchParams
+  extends ReadOnlyChildrenType,
+    TypeSearchParams {}
+
+type TypeSetState<T> = React.Dispatch<React.SetStateAction<T>>;

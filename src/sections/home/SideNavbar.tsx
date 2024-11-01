@@ -36,46 +36,52 @@ export default function SideNavbar() {
       </SheetTrigger>
       <SheetContent side="left">
         <nav className="grid gap-6 py-6 text-lg font-medium">
-          <Link
-            href="/"
-            className="flex w-fit items-center gap-x-2.5 text-lg font-semibold"
-          >
-            <Image
-              width={50}
-              height={50}
-              src={NaKoshiAscLogo}
-              className="size-14 rounded-full max-[380px]:size-10"
-              alt="NA koshi area service committee logo"
-            />
-            <div>
-              <p className="self-center whitespace-nowrap pr-2 font-serif text-lg font-bold max-[380px]:text-[4.5dvw] sm:text-xl">
-                Narcotics Anonymous
-              </p>
-              <p className="self-center whitespace-nowrap font-sans text-base font-semibold text-foreground/70 max-[380px]:text-sm">
-                Koshi Area
-              </p>
-            </div>
-            <span className="sr-only">
-              Narcotics Anonymous Koshi Area Service Committee
-            </span>
-          </Link>
+          <SheetTrigger asChild>
+            <Link
+              href="/"
+              className="flex w-fit items-center gap-x-2.5 text-lg font-semibold"
+            >
+              <Image
+                width={50}
+                height={50}
+                src={NaKoshiAscLogo}
+                className="size-14 rounded-full max-[380px]:size-10"
+                alt="NA koshi area service committee logo"
+              />
+              <div>
+                <p className="self-center whitespace-nowrap pr-2 font-serif text-lg font-bold max-[380px]:text-[4.5dvw] sm:text-xl">
+                  Narcotics Anonymous
+                </p>
+                <p className="self-center whitespace-nowrap font-sans text-base font-semibold text-foreground/70 max-[380px]:text-sm">
+                  Koshi Area
+                </p>
+              </div>
+              <span className="sr-only">
+                Narcotics Anonymous Koshi Area Service Committee
+              </span>
+            </Link>
+          </SheetTrigger>
+
           {Links.map((link) => {
             return (
               <ActivePathnameHighliter
+                asChild
                 key={link.link}
                 href={link.link}
                 activeStyle="bg-muted"
                 className="mx-[-0.65rem] flex items-center gap-4 rounded-xl hover:bg-muted/80 focus-visible:bg-muted/80"
               >
-                <Link
-                  href={link.link}
-                  className={
-                    "flex w-full items-center gap-4 rounded-xl px-3 py-2 text-foreground/80 hover:text-foreground focus-visible:bg-muted focus-visible:text-foreground group-[.isActive]:text-foreground"
-                  }
-                >
-                  <link.icon className="size-5" />
-                  {link.name}
-                </Link>
+                <SheetTrigger asChild>
+                  <Link
+                    href={link.link}
+                    className={
+                      "flex w-full items-center gap-4 rounded-xl px-3 py-2 text-foreground/80 hover:text-foreground focus-visible:bg-muted focus-visible:text-foreground group-[.isActive]:text-foreground"
+                    }
+                  >
+                    <link.icon className="size-5" />
+                    {link.name}
+                  </Link>
+                </SheetTrigger>
               </ActivePathnameHighliter>
             );
           })}
