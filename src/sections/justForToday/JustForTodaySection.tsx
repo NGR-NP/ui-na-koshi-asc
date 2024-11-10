@@ -7,7 +7,7 @@ import { Section, WrapperSection } from "@/components/custom/Section";
 
 import CacheTags from "@/constant/CacheTags";
 
-import { formatdDate } from "./lib/formatDateForJFT";
+import { formatDate } from "./lib/formatDate";
 
 async function GetJFT(date: string) {
   try {
@@ -33,7 +33,7 @@ interface JustForTodaySectionProps {
 export default async function JustForToDaySection({
   className,
 }: JustForTodaySectionProps) {
-  const data = await GetJFT(formatdDate(new Date()));
+  const data = await GetJFT(formatDate(new Date(), "", "Asia/Kathmandu"));
 
   if (!data) return null;
   return (
@@ -45,7 +45,7 @@ export default async function JustForToDaySection({
           </Heading>
           <div className="flex flex-wrap justify-between gap-x-4 gap-y-2">
             <Paragraph className="font-mono text-xl font-semibold" asChild>
-              <time>{formatdDate(data?.date, "MMMM, dd")}</time>
+              <time>{formatDate(data?.date, "MMMM, dd")}</time>
             </Paragraph>
             <Paragraph className="text-nowrap font-mono text-lg font-medium italic">
               <span className="font-normal text-muted-foreground/70">
