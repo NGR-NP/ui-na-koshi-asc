@@ -1,8 +1,8 @@
-import { ReactNode } from "react";
+import { ReactNode, Suspense } from "react";
 
 import { Clock, Map, PersonStanding } from "lucide-react";
 
-import { checkMeetingStatus, getDayName } from "@/lib/meeting-time-status";
+import { getDayName } from "@/lib/meeting-time-status";
 import { cn } from "@/lib/utils";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -15,16 +15,19 @@ import {
 
 import {
   IconCalender,
-  IconDot,
   IconGroupUsers,
   IconLocation,
 } from "@/components/Svg/svgicons";
 import { ExternalLink } from "@/components/custom/ExternalLink";
 
 import { LogoNAKoshiWhite, LogoNaKoshi } from "@/constant/images";
+import {
+  MeetingStatusIndecator,
+  MeetingStatusTooltip,
+} from "@/sections/Meetings/comp/MeetingStatus";
+import MeetingTime from "@/sections/Meetings/comp/meetingTime";
 
 import IconMoniter from "../Svg/MoniterSvgIcon";
-import SimpleTooltipComp from "../custom/SimpleTooltip";
 import { Separator } from "../ui/separator";
 
 interface MeetingCardProps {
@@ -32,7 +35,6 @@ interface MeetingCardProps {
   className?: string;
 }
 export const MeetingCard = ({ item, className }: MeetingCardProps) => {
-  const status = checkMeetingStatus(item);
   const shortName = item.name
     .split(" ")
     .slice(0, 2)
@@ -67,12 +69,9 @@ export const MeetingCard = ({ item, className }: MeetingCardProps) => {
               )}
             />
             <div className="absolute bottom-1 right-2 ml-auto font-medium">
-              <IconDot
-                content={status.message}
-                danger={status.live === 0 && true}
-                success={status.live === 2 && true}
-                yellow={status.live === 1 && true}
-              />
+              <Suspense>
+                <MeetingStatusIndecator item={item} />
+              </Suspense>{" "}
             </div>
             <AvatarFallback className="transition-all duration-300">
               {shortName}
@@ -84,13 +83,9 @@ export const MeetingCard = ({ item, className }: MeetingCardProps) => {
                 <p className="line-clamp-2 text-base font-medium leading-none">
                   {item?.name}
                 </p>
-                {status.live == 0 && (
-                  <SimpleTooltipComp content={status.message}>
-                    <p className="line-clamp-2 text-sm text-muted-foreground">
-                      {status.shortMessage}
-                    </p>
-                  </SimpleTooltipComp>
-                )}
+                <Suspense>
+                  <MeetingStatusTooltip item={item} />
+                </Suspense>
               </div>
             </div>
             <ul className="flex w-full flex-col flex-wrap justify-between gap-3 pl-1.5">
@@ -123,8 +118,9 @@ export const MeetingCard = ({ item, className }: MeetingCardProps) => {
                 <Clock size={18} /> Time:&emsp;
               </CardDescription>
               <CardDescription className="text-base group-hover:text-foreground">
-                <b className="text-nowrap">{item?.startTime}</b>&nbsp;to&nbsp;
-                <b className="text-nowrap">{item.endTime}</b>
+                <Suspense>
+                  <MeetingTime item={item} />
+                </Suspense>
               </CardDescription>
             </li>
             <li className="group flex w-full items-start justify-between gap-x-2 gap-y-1 text-foreground/80 max-sm:flex-col max-sm:items-stretch">

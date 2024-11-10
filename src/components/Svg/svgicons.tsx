@@ -2,8 +2,6 @@ import { forwardRef } from "react";
 
 import { cn } from "@/lib/utils";
 
-import SimpleTooltipComp from "../custom/SimpleTooltip";
-
 export const IconLocation = forwardRef<SVGSVGElement, SVGProp>(
   ({ className, ...props }, ref) => (
     <svg
@@ -413,36 +411,6 @@ export const IconAboutUsSolid = forwardRef<SVGSVGElement, SVGProp>(
   )
 );
 IconAboutUsSolid.displayName = "IconAboutUsSolid";
-
-interface iconDotProps {
-  className?: string;
-  danger?: boolean;
-  success?: boolean;
-  yellow?: boolean;
-  content?: string;
-}
-
-export const IconDot = ({
-  className,
-  danger,
-  success,
-  yellow,
-  content,
-}: iconDotProps) => {
-  return (
-    <SimpleTooltipComp content={content}>
-      <div
-        className={cn(
-          "size-2 rounded-full border-none bg-gray-400 ring-1 ring-gray-500 ring-offset-2 ring-offset-card",
-          success && "bg-green-400 ring-green-500",
-          danger && "bg-red-600 ring-red-600",
-          yellow && "bg-yellow-400 ring-yellow-500",
-          className
-        )}
-      />
-    </SimpleTooltipComp>
-  );
-};
 
 export const IconWhatsapp = forwardRef<SVGSVGElement, SVGProp>(
   ({ className, ...props }, ref) => (
