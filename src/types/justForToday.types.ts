@@ -8,3 +8,9 @@ interface TypeJustForToday {
   just_for_today: string;
   basic_text: string;
 }
+interface JFTPageProps {
+  searchParams: {
+    today: string;
+    timeZone: string;
+  };
+}

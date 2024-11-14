@@ -5,7 +5,6 @@ import AboutAddictSection from "@/sections/home/AboutAddictSection";
 import AboutNAProgramSection from "@/sections/home/AboutNAProgramSection";
 import IntroSection from "@/sections/home/IntroSection";
 import NeedHelpSection from "@/sections/home/NeedHelpSection";
-import JustForToDaySection from "@/sections/justForToday/JustForTodaySection";
 
 export default function Home() {
   return (
@@ -13,7 +12,7 @@ export default function Home() {
       <IntroSection />
       <NeedHelpSection />
       <AboutAddictSection />
-      <JustForToDaySection />
+      {/* <JustForToDaySection /> */}
       <AboutNAProgramSection />
 
       <TodayAndUpcommingMeetingSection />

@@ -1,12 +1,22 @@
-import { format, toZonedTime } from "date-fns-tz";
+import { format, formatInTimeZone, toZonedTime } from "date-fns-tz";
 
 export function formatDate(
   date: Date,
   type?: string,
   timeZone?: string | "Asia/Kathmandu"
 ): string {
-  console.log(format(date, type || "yyyy-MM-dd", { timeZone }));
   return format(date, type || "yyyy-MM-dd", { timeZone });
+}
+export function formatDateTz(
+  date: Date,
+  type?: string,
+  timeZone?: string | "Asia/Kathmandu"
+): string {
+  return formatInTimeZone(
+    date,
+    timeZone || "Europe/Paris",
+    type || "yyyy-MM-dd"
+  );
 }
 
 // Function to convert a time string (e.g., "17:00" in NPT) to a Date object in Nepal Time (NPT)

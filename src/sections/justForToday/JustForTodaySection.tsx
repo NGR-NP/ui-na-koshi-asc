@@ -1,3 +1,5 @@
+import { notFound } from "next/navigation";
+
 import { cn } from "@/lib/utils";
 
 import { BlockQuote } from "@/components/custom/Blockquote";
@@ -9,14 +11,16 @@ import CacheTags from "@/constant/CacheTags";
 
 import { formatDate } from "./lib/formatDate";
 
-async function GetJFT(date: string) {
+async function GetJFT(today: string) {
   try {
-    const res = await fetch(`https://just-for-today.onrender.com/jft/${date}`, {
-      next: {
-        revalidate: 43200,
-        tags: [CacheTags.JFT, `${CacheTags.JFT}-${date}`],
-      },
-    });
+    const res = await fetch(
+      `https://just-for-today.onrender.com/jft/${today}`,
+      {
+        next: {
+          tags: [CacheTags.JFT, `${CacheTags.JFT}-${today}`],
+        },
+      }
+    );
     const data: TypeJustForToday = await res.json();
     if (res.status !== 200) return null;
     return data;
@@ -28,14 +32,16 @@ async function GetJFT(date: string) {
 
 interface JustForTodaySectionProps {
   className?: string;
+  date: string;
 }
 
 export default async function JustForToDaySection({
   className,
+  date,
 }: JustForTodaySectionProps) {
-  const data = await GetJFT(formatDate(new Date(), "", "Asia/Kathmandu"));
+  const data = await GetJFT(date);
 
-  if (!data) return null;
+  if (!data) return notFound();
   return (
     <WrapperSection className="bg-background">
       <Section className={cn("w-full", className)}>
