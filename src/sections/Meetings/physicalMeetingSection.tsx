@@ -10,7 +10,7 @@ import CacheTags from "@/constant/CacheTags";
 async function GetMeetingLists() {
   const res = await fetch(
     "https://gist.githubusercontent.com/Alinalamakarki/5c4ce5ccc26c636cbda2e37a190962eb/raw/na-koshi-asc-metting-list.json",
-    { next: { revalidate: 286400, tags: [CacheTags.MeetingList] } }
+    { next: { revalidate: 300, tags: [CacheTags.MeetingList] } }
   );
 
   const data: MeetingListType[] = await res.json();
