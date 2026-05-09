@@ -22,7 +22,7 @@ export default function NeedHelpSection() {
             WhatsApp
             <sup className="inline-block brightness-90 duration-300 hover:scale-105 hover:brightness-100 hover:duration-200 dark:brightness-75">
               <Link
-                href="https://api.whatsapp.com"
+                href="https://wa.me/9704503606"
                 target="_blank"
                 rel="noreferrer"
               >
